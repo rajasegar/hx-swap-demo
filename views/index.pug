@@ -1,0 +1,35 @@
+doctype html
+html(lang="en")
+  head
+    title hx-swap-demo
+    link(href="styles.css", rel="stylesheet")
+    script(src="https://unpkg.com/htmx.org@1.3.1")
+  body
+    .container
+      h1 hx-swap-demo
+      p <a href="https://htmx.org">htmx</a> offers a few different ways to swap the HTML returned into the DOM. By default, the content replaces the <strong>innerHTML</strong> of the target element. You can modify this by using the <a href="https://htmx.org/attributes/hx-swap/">hx-swap</a> attribute with any of the following values:
+      .grid
+        #left-col
+          form(hx-post="/todos", hx-target="#todolist", hx-swap="innerHTML")
+            input#txtTodo(type="text", name="todo", required)
+            button(type="submit") hx-swap='innerHTML'
+          form(hx-post="/todos", hx-target="#todolist", hx-swap="outerHTML")
+            input#txtTodo(type="text", name="todo", required)
+            button(type="submit") hx-swap='outerHTML'
+          form(hx-post="/todos", hx-target="#todolist", hx-swap="beforeend")
+            input#txtTodo(type="text", name="todo", required)
+            button(type="submit") hx-swap="beforeend"
+          form(hx-post="/todos", hx-target="#todolist", hx-swap="afterbegin")
+            input#txtTodo(type="text", name="todo", required)
+            button(type="submit") hx-swap="afterbegin"
+          form(hx-post="/todos", hx-target="#todolist", hx-swap="beforebegin")
+            input#txtTodo(type="text", name="todo", required)
+            button(type="submit") hx-swap="beforebegin"
+          form(hx-post="/todos", hx-target="#todolist", hx-swap="afterend")
+            input#txtTodo(type="text", name="todo", required)
+            button(type="submit") hx-swap="afterend"
+          form(method="post", action="/reset")
+            button.btn-danger(type="submit") Reset Page
+        #right-col
+          ul#todolist
+            include includes/todolist.pug
